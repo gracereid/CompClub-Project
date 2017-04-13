@@ -61,3 +61,14 @@ CREATE TABLE sold(
 	FOREIGN KEY (price) REFERENCES products(price),
 	FOREIGN KEY (type) REFERENCES products(type)
 );
+
+CREATE TABLE report(
+	ID				INT				NOT NULL,
+	invesment		DECIMAL(4,2)	NOT NULL,
+	revenew			DECIMAL(4,2)	NOT NULL,
+	type 			VARCHAR(20)		NOT NULL,
+	when			DATE()			NOT NULL,
+
+	PRIMARY KEY(ID),
+	
+);
