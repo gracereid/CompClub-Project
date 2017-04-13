@@ -51,16 +51,11 @@ CREATE TABLE admin(
 CREATE TABLE sold(
 	sold_ID		INT		NOT NULL,
 	ID		INT 		NOT NULL,
-	name		VARCHAR(20)	NOT NULL,
-	type		VARCHAR(20)	NOT NULL,
 	price		DECIMAL(3,2)	NOT NULL,
 	quantity	INT		NOT NULL,
 	date		DATE		NOT NULL,
 	PRIMARY KEY(sold_ID),
 	FOREIGN KEY (ID) REFERENCES products(ID)
-	FOREIGN KEY (name) REFERENCES products(name),
-	FOREIGN KEY (type) REFERENCES products(type),
-	FOREIGN KEY (price) REFERENCES products(price)
 );
 
 CREATE TABLE report(
