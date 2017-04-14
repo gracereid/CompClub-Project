@@ -10,6 +10,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+  
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -43,14 +44,66 @@
 	Administrator mode. This mode is for adding removing and editing itmes in the store.
 	Additional features include: check Inventory, revenew and favorite itmes.  
 </div>
-  <p>      
-	<button type="button" class="btn btn-scondary btn-lg btn-block">
-	<a href="./add_item.html">Add Item</a>
-	</button>
-	<button type="button" class="btn btn-secondary btn-lg btn-block">
-	<a href="./edit_item.html"> Edit Item</a></button> 
-	<button type="button" class="btn btn-danger btn-lg btn-block">Remove Item</button>
+  <p>
+ 
+    <button id="more" type="button" onclick="show(1)" class="btn btn-scondary btn-lg btn-block">
+    Add Item</button>  
+    <button type="button" onclick="show(2)"class="btn btn-secondary btn-lg btn-block">
+    Edit Item</button> 
+    <button type="button" onclick="show(3)" onclick="remove()" class="btn btn-danger btn-lg btn-block">Remove Item</button>
  </p>
+ <script src="script.js" type="text/javascript"></script>      
+     <div id="table1"> 
+
+
+  <form class="form-inline">
+
+   <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+    <option selected>Type</option>
+    <option value="beverage">Beverage</option>
+    <option value="candy">Candy</option>
+    <option value="pastry">Pastry</option>
+    <option value="salty">Salty</option>
+    <option value="microwave">Microwave meals</option>
+  </select>
+       
+  <label class="sr-only " for="inlineFormInput">ID</label>
+  <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Bar Code">
+
+   <label class="sr-only" for="inlineFormInput">Brand</label>
+  <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Brand">
+
+   <label class="sr-only" for="inlineFormInput">Original price</label>
+  <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Original ($)">
+
+  <label class="sr-only" for="inlineFormInput">Club Price</label>
+  <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Club ($)">
+
+  <label class="sr-only" for="inlineFormInput">Quantity</label>
+  <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Quantity">
+  
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+     </div>
+     <div id="table2">
+ <form class="form-inline">
+  <label class="sr-only " for="inlineFormInput">ID</label>
+  <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Bar Code">
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+ </form>
+      </div>
+     <div id="table3"> 
+  <form class="form-inline">
+  <label class="sr-only " for="inlineFormInput">ID</label>
+  <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Bar Code">
+
+  <button type="submit" class="btn btn-danger">Delete</button>
+ </form>
+     </div>
+
+
 </div>
 </body>
 </html>
