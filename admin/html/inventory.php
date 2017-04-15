@@ -86,7 +86,8 @@
 	if(!$item){
 		die($db->error);
 	}
-	$sold = $db->query("SELECT * FROM sold INNER JOIN products ON products.ID=sold.ID");
+	$sold = $db->query("SELECT sold.ID AS ID,name,type, sold.price AS price,sold.quantity AS quantity, date FROM sold INNER JOIN products ON products.ID=sold.ID");
+
 	if(!$sold){
 		die($db->error);
 	}	
@@ -119,8 +120,23 @@ while ($row = mysqli_fetch_assoc($item)) {
    echo "<td>".$row["name"]."</td>";
    echo "<td>".$row["type"]."</td>";
    echo "<td>".$row["price"]."</td>";
+   echo "<td>".$row["org_price"]."</td>";
    echo "<td>".$row["quantity"]."</td>";
-   echo "<td>".$row["dare"]."</td>";
+	if($row["quantity"]>0){
+		echo '
+		<td>
+		<div class="alert alert-success">
+  			<strong>YES</strong>
+		</div>
+		</td>';
+	}else{
+		echo '
+		<td>
+		<div class="alert alert-danger">
+  			<strong>NO</strong>
+		</div>
+		</td>';
+	}
    echo "</tr>";
 }
 
@@ -157,8 +173,8 @@ while ($row = mysqli_fetch_assoc($sold)) {
    echo "<td>".$row["name"]."</td>";
    echo "<td>".$row["type"]."</td>";
    echo "<td>".$row["price"]."</td>";
-   echo "<td>".$row["org_price"]."</td>";
    echo "<td>".$row["quantity"]."</td>";
+   echo "<td>".$row["date"]."</td>";
    echo "</tr>";
 }      
 
@@ -168,15 +184,6 @@ while ($row = mysqli_fetch_assoc($sold)) {
   </table>
 </div>
  </div>
-
-
-
-
-
-
- 
-
-
 
 
 </body>
