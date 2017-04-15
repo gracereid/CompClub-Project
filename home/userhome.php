@@ -25,7 +25,20 @@
 </nav>
 
 <div class="container">
+<?php
+$db = new mysqli("localhost", "cclub", "cclub", "Cclub_shop");
+	if ($db->connect_errno) {
+	die("could not connect to database: " . mysqli_connect_error());
+	}
+	echo $_POST(['name']);
+	$user = $db->query("SELECT * FROM customers where id=".$_POST['name']);
 
+	if(!$user){
+		die($db->error);
+	}
+	
+
+?>
 
    
    <div class="row">
@@ -64,7 +77,7 @@
   
 <div class="page-header">
             <h2>My Account</h2>
-            <p>Welcome <?php echo $_POST['fname'],' ',$_POST['lname']; ?></p>   
+            <p>Welcome <?php echo $_POST['name']; ?></p>   
          </div>    <p>At Western Michigan University</p>
     We provide the best snaks at the best price, we make revenues bigly there is nobody that makes snaks as well as we do. 
  </nav>
@@ -75,15 +88,15 @@
          <div class="well">
             <p><?php 
             	echo 'Email: ',$_POST['email'];
-				echo '<br><br>First Name: ',$_POST['fname'];
-				echo '<br><br>Last Name: ',$_POST['lname'];
+				/*echo '<br><br>First Name: ',$_POST['fname'];
+				echo '<br><br>Last Name: ',$_POST['lname'];*/
             	
 				
 				
 				 //Validate
 			
 				 
-			   if(isset($_POST['email']))
+			   /*if(isset($_POST['email']))
 			   {
 			   	//echo "Some gucci";
 				    $emailReg = "/(.+)@([^\.].*)\.([a-z]{2,})/";
@@ -113,7 +126,7 @@
 								die ($e -> getMessage());
 							}
 					}
-			   }
+			   }*/
             	
             	
             	?></p>     

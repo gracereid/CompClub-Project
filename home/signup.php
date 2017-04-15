@@ -39,15 +39,9 @@
 
   <form role="form" class="form-horizontal" action="userhome.php" method="post">
   	<div class="form-group">
-     <label class="control-label col-sm-2" for="name">First Name</label>
+     <label class="control-label col-sm-2" for="name">Name</label>
       <div class="col-sm-10">
-       <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter your first name">
-      </div>
-   </div>
-   <div class="form-group">
-     <label class="control-label col-sm-2" for="name">Last Name</label>
-      <div class="col-sm-10">
-       <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter your last name">
+       <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
       </div>
    </div>
    <div class="form-group">
