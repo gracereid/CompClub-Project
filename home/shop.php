@@ -54,6 +54,28 @@
 	    </thead>
 	    <tbody>
 	      <tr>
+	      	<?php 
+	      		try{
+						 		$connString = "mysql:host=localhost; dbname=art";
+								$user = "root";
+								$pass = ""; 
+								$pdo = new PDO($connString, $user, $pass);
+								$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+								$email = $_POST['email'];
+								$pass = $_POST['password1'];
+								$fname = $_POST['first'];
+								$lname = $_POST['last'];
+								$sql = 'INSERT INTO customers(firstname, lastname, email) VALUES ("'.$fname.'","'.$lname.'","'.$email.'")';
+								$result = $pdo->query($sql);
+								$sql = 'INSERT INTO customerlogon(username,pass) VALUES ("'.$email.'","'.$pass.'")';
+								$result = $pdo->query($sql);
+								$pdo=null;
+								}
+							catch(PDOException $e)
+							{
+								die ($e -> getMessage());
+							}
+	      	?>
 		<td>Sprite</td>
 		<td>0.50</td>
 	
