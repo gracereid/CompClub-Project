@@ -79,10 +79,18 @@
 	$db = new mysqli("localhost", "cclub", "cclub", "Cclub_shop");
 	if ($db->connect_errno) {
 	die("could not connect to database: " . mysqli_connect_error());
+	}
 
 	$item = $db->query("SELECT * FROM products");
-	$sold = $db->query("SELECT * FROM sold");
-}
+
+	if(!$item){
+		die($db->error);
+	}
+	$sold = $db->query("SELECT * FROM sold INNER JOIN products ON products.ID=sold.ID");
+	if(!$sold){
+		die($db->error);
+	}	
+
 		
 ?>
 
@@ -104,54 +112,59 @@
       </tr>
     </thead>
     <tbody>
-      <?php
-               while ($row = mysql_fetch_array($item)) {
-                   echo "<tr>";
-                   echo "<td>".$row[ID]."</td>";
-                   echo "<td>".$row[name]."</td>";
-                   echo "<td>".$row[type]."</td>";
-		   echo "<td>".$row[price]."</td>";
-                   echo "<td>".$row[org_price]."</td>";
-		   echo "<td>".$row[quantity]."</td>";
-                   echo "</tr>";
-               }
+<?php
+while ($row = mysqli_fetch_assoc($item)) {
+   echo "<tr>";
+   echo "<td>".$row["ID"]."</td>";
+   echo "<td>".$row["name"]."</td>";
+   echo "<td>".$row["type"]."</td>";
+   echo "<td>".$row["price"]."</td>";
+   echo "<td>".$row["quantity"]."</td>";
+   echo "<td>".$row["dare"]."</td>";
+   echo "</tr>";
+}
 
-            ?> 
-    </tbody>
-  </table>
+?> 
+</tbody>
+</table>
 </div>
 
 
- </div>
+</div>
 
- <div id="t2"> 
+<div id="t2"> 
 <div class="container-fluid">
-  <h2>Sold items</h2>
-  <p>List of all Sold Items:</p>            
-  <table class="table">
-    <thead>
-      <tr>
-        <th>ID:</th>
-        <th>Name</th>
-        <th>Type:</th>
-        <th>Price ($):</th>
-        <th>Quantity:</th>
-        <th>Date:</th>
-      
-        
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>0401513</td>
-        <td>Sprite</td>
-        <td>Drink</td>
-        <td>.50</td>
-        <td>.45</td>
-        <td>07/12/15</td>
-        
-      </tr>
-    </tbody>
+<h2>Sold items</h2>
+<p>List of all Sold Items:</p>            
+<table class="table">
+<thead>
+<tr>
+<th>ID:</th>
+<th>Name</th>
+<th>Type:</th>
+<th>Price ($):</th>
+<th>Quantity:</th>
+<th>Date:</th>
+
+
+</tr>
+</thead>
+<tbody>
+<?php
+while ($row = mysqli_fetch_assoc($sold)) {
+   echo "<tr>"; 
+   echo "<td>".$row["ID"]."</td>";
+   echo "<td>".$row["name"]."</td>";
+   echo "<td>".$row["type"]."</td>";
+   echo "<td>".$row["price"]."</td>";
+   echo "<td>".$row["org_price"]."</td>";
+   echo "<td>".$row["quantity"]."</td>";
+   echo "</tr>";
+}      
+
+?>
+
+</tbody>
   </table>
 </div>
  </div>
