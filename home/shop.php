@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <title> Cclub Shop </title>
+	<title> Cclub Shop </title>
         <meta charset="utf-8">
-        <meta name="viewport" content="" width=device-width, initial-scale="1">
+        <meta name="viewport" content=""width=device-width, initial-scale="1">
         <link rel="stylesheet" 
                 href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
+ </head>
+ 
 <body>
   
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand">Cclub Shop</a>
+      <a class="navbar-brand" href="shop.php">Cclub Shop</a>
+      
     </div>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#"><i class="glyphicon glyphicon-usd"></i>10.00</a></li>
@@ -24,7 +26,7 @@
 <div class="jumbotron">
 <nav class="container">
   
-    <h1>Cclub Shop:</h1>      
+    <h1>Welcome to the Cclub shop</h1>      
     <p>At Western Michigan University</p>
     We provide the best snaks at the best price, we make revenues bigly there is nobody that makes snaks as well as we do. 
  </nav>
