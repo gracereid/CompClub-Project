@@ -16,9 +16,13 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="shop.php">Cclub Shop</a>
+        <ul class="nav navbar-nav navbar-left">
+            <li><a href="userhome.php"><i class="glyphicon glyphicon-user"></i> My Account</a></li>
+		</ul>
       
     </div>
     <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><i class="glyphicon glyphicon-shopping-cart"></i> My cart</a></li>
       <li><a href="#"><i class="glyphicon glyphicon-usd"></i>10.00</a></li>
      </ul>
   </div>
@@ -26,17 +30,52 @@
 
 <div class="container">
 <?php
-$db = new mysqli("localhost", "cclub", "cclub", "Cclub_shop");
-	if ($db->connect_errno) {
-	die("could not connect to database: " . mysqli_connect_error());
-	}
-	echo $_POST(['name']);
-	$user = $db->query("SELECT * FROM customers where id=".$_POST['name']);
 
-	if(!$user){
-		die($db->error);
-	}
+//Validate
+			
+				 
+   if(isset($_POST['pass2']))//from signup
+   {
+   	//echo "Some gucci";
+	    $emailReg = "/(.+)@([^\.].*)\.([a-z]{2,})/";
+		if (preg_match($emailReg, $_POST['email']) && isset($_POST['first']) && isset($_POST['last']) && isset($_POST['password1'])
+		 && isset($_POST['password2']) && isset($_POST['privacy']))
+		{
+			//echo "All gucci";
+			   //Add to SQL
+			    try{
+			 		$connString = "mysql:host=localhost; dbname=art";
+					$user = "root";
+					$pass = ""; 
+					$pdo = new PDO($connString, $user, $pass);
+					$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+					$email = $_POST['email'];
+					$pass = $_POST['password1'];
+					$fname = $_POST['first'];
+					$lname = $_POST['last'];
+					$sql = 'INSERT INTO customers(name, id) VALUES ("'.$fname.'","'.$lname.'","'.$email.'")';
+					
+					$result = $pdo->query($sql);
+					$pdo=null;
+					}
+				catch(PDOException $e)
+				{
+					die ($e -> getMessage());
+				}
+		}
+   }
+else{//from login
+	$db = new mysqli("localhost", "cclub", "cclub", "Cclub_shop");
+		if ($db->connect_errno) {
+		die("could not connect to database: " . mysqli_connect_error());
+		}
+		$name= $_POST["name"];
+		$user = $db->query("SELECT * FROM customers where id=".$name);
 	
+		if(!$user){
+			die($db->error);
+		}
+}		
 
 ?>
 
@@ -93,40 +132,7 @@ $db = new mysqli("localhost", "cclub", "cclub", "Cclub_shop");
             	
 				
 				
-				 //Validate
-			
 				 
-			   /*if(isset($_POST['email']))
-			   {
-			   	//echo "Some gucci";
-				    $emailReg = "/(.+)@([^\.].*)\.([a-z]{2,})/";
-		  			if (preg_match($emailReg, $_POST['email']) && isset($_POST['first']) && isset($_POST['last']) && isset($_POST['password1'])
-					 && isset($_POST['password2']) && isset($_POST['privacy']))
-		  			{
-		  				//echo "All gucci";
-						   //Add to SQL
-						    try{
-						 		$connString = "mysql:host=localhost; dbname=art";
-								$user = "root";
-								$pass = ""; 
-								$pdo = new PDO($connString, $user, $pass);
-								$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-								$email = $_POST['email'];
-								$pass = $_POST['password1'];
-								$fname = $_POST['first'];
-								$lname = $_POST['last'];
-								$sql = 'INSERT INTO customers(firstname, lastname, email) VALUES ("'.$fname.'","'.$lname.'","'.$email.'")';
-								$result = $pdo->query($sql);
-								$sql = 'INSERT INTO customerlogon(username,pass) VALUES ("'.$email.'","'.$pass.'")';
-								$result = $pdo->query($sql);
-								$pdo=null;
-								}
-							catch(PDOException $e)
-							{
-								die ($e -> getMessage());
-							}
-					}
-			   }*/
             	
             	
             	?></p>     

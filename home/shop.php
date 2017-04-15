@@ -15,10 +15,14 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="userhome.php">Cclub Shop</a>
+      <a class="navbar-brand" href="shop.php">Cclub Shop</a>
+     <ul class="nav navbar-nav navbar-left">
+       <li><a href="userhome.php"><i class="glyphicon glyphicon-user"></i> My Account</a></li>
+		</ul>
       
     </div>
     <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><i class="glyphicon glyphicon-shopping-cart"></i> My cart</a></li>
       <li><a href="#"><i class="glyphicon glyphicon-usd"></i>10.00</a></li>
      </ul>
   </div>
