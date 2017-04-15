@@ -13,9 +13,11 @@ org_price the original price
 type if its a drink/salty or sweet snack
 
 */
+DROP USER IF EXISTS 'cclub'@'localhost';
+CREATE USER 'cclub'@'localhost' IDENTIFIED BY 'cclub';
+GRANT ALL PRIVILEGES ON *.* TO 'cclub'@'localhost' WITH GRANT OPTION;
 
 DROP DATABASE IF EXISTS Cclub_shop;
-
 CREATE DATABASE Cclub_shop;
 
 USE Cclub_shop;

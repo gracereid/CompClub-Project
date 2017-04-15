@@ -75,6 +75,18 @@
 
 <div class="container-fluid">
 <script src="../js/add_admin.js" type="text/javascript"></script>
+<?php
+	$db = new mysqli("localhost", "cclub", "cclub", "Cclub_shop");
+	if ($db->connect_errno) {
+	die("could not connect to database: " . mysqli_connect_error());
+
+	$item = $db->query("SELECT * FROM products");
+	$sold = $db->query("SELECT * FROM sold");
+}
+		
+?>
+
+
  <div id="t1"> 
  <h2>All items</h2>
   <p>List of all register Items:</p>            
@@ -92,15 +104,19 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>0401513</td>
-        <td>Sprite</td>
-        <td>Drink</td>
-        <td>.50</td>
-        <td>.45</td>
-        <td>3</td>
-        <td>YES</td>
-      </tr>
+      <?php
+               while ($row = mysql_fetch_array($item)) {
+                   echo "<tr>";
+                   echo "<td>".$row[ID]."</td>";
+                   echo "<td>".$row[name]."</td>";
+                   echo "<td>".$row[type]."</td>";
+		   echo "<td>".$row[price]."</td>";
+                   echo "<td>".$row[org_price]."</td>";
+		   echo "<td>".$row[quantity]."</td>";
+                   echo "</tr>";
+               }
+
+            ?> 
     </tbody>
   </table>
 </div>
