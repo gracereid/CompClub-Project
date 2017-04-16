@@ -1,7 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title> Inventory </title>
+<?php
+	$db = new mysqli("localhost", "cclub", "cclub", "Cclub_shop");
+	if ($db->connect_errno) {
+	die("could not connect to database: " . mysqli_connect_error());
+	}
+
+?>
+  
+ <title> Inventory </title>
   <meta charset="utf-8">
   <meta name="viewport" content=""width=device-width, initial-scale=1">
   <link rel="stylesheet" 
@@ -13,20 +21,20 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="../../home/home.html">Cclub Shop</a>
+      <a class="navbar-brand" href="../../home/shop.php">Cclub Shop</a>
     </div>
     <ul class="nav navbar-nav">
   <li class="dropdown">
          <a class="active dropdown-toggle" data-toggle="dropdown">Admin
          <span class="caret"></span></a>
          <ul class="dropdown-menu">
-          <li><a href="./admin.html">Home</a></li>
-          <li><a href="./add_admin.html">Add Admin</a></li>      
+          <li><a href="./admin.php">Home</a></li>
+          <li><a href="./add_admin.php">Add Admin</a></li>      
 
   </ul>
        </li>
       <li class="active"><a>Inventory</a></li>
-      <li><a href="./revenue.html">Revenue</a></li>
+      <li><a href="./revenue.php">Revenue</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
 
@@ -41,23 +49,22 @@
     <p>Cclub Shop at Western Michigan University</p>
 
     Select the type of search.
+<form class="form-inline"  method="GET">
   
-  <div class="col-lg-50">
-    <div class="input-group">
-      <input type="text" class="form-control" aria-label="...">
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
-        <ul class="dropdown-menu dropdown-menu-right">
-          <li><a href="#">Search by name</a></li>
-          <li><a href="#">Search by barcode</a></li>
-          <li role="separator" class="divider"></li>
-          <li><a href="#">Monthly Stament</a></li>
-        </ul>
-      </div><!-- /btn-group -->
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-</div><!-- /.row -->
+  <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="type" id="inlineFormCustomSelect">
+    
+    <option value="bar">Bar Code</option>
+    <option value="nam">Name</option>
+    <option value="mon">Last Month</option>
+  </select>
+  <input type="text" name="string" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Search">
 
+
+  <button type="submit"  class="btn btn-standard"><span class="glyphicon glyphicon-search"></span></button>
+</form>
+
+
+ 
 
 
 
@@ -76,11 +83,6 @@
 <div class="container-fluid">
 <script src="../js/add_admin.js" type="text/javascript"></script>
 <?php
-	$db = new mysqli("localhost", "cclub", "cclub", "Cclub_shop");
-	if ($db->connect_errno) {
-	die("could not connect to database: " . mysqli_connect_error());
-	}
-
 	$item = $db->query("SELECT * FROM products");
 
 	if(!$item){
@@ -95,10 +97,9 @@
 		
 ?>
 
-
  <div id="t1"> 
  <h2>All items</h2>
-  <p>List of all register Items:</p>            
+          
   <table class="table">
     <thead>
       <tr>
@@ -114,7 +115,41 @@
     </thead>
     <tbody>
 <?php
+	if(isset($_GET["type"]) && !empty($_GET["string"])){ 
+echo '<script type="text/javascript">
+$(document).ready(function() {
+	show(1);
+});
+</script>' ;
+
+	$type =  $_GET['type'];
+	$string =  $_GET['string'];
+	
+	$type = htmlspecialchars($type);
+	$string = htmlspecialchars($string);
+	
+	$type = $db->real_escape_string($type);
+	$string = $db->real_escape_string($string);
+	
+        if ($type==="bar"){
+                $res = $db->query('SELECT * FROM products WHERE ID='.$string);
+		$item=$res;
+	}
+	if($type==="nam"){
+		$res = $db->query("SELECT * FROM products WHERE name='".$string."'");
+		$item=$res;
+	}if($type==="mon"){
+		$res = $db->query("SELECT * FROM products WHERE DATE BETWEEN date_sub(now(), INTERVAL 1 MONTH and NOW()");
+		$item=$res;
+	}		
+	
+	 echo " <p>This are the items that match your request</p>";
+	}else{
+	 echo '<p>List of all register Items:</p>'; 
+	}
+if ($item){
 while ($row = mysqli_fetch_assoc($item)) {
+   
    echo "<tr>";
    echo "<td>".$row["ID"]."</td>";
    echo "<td>".$row["name"]."</td>";
@@ -122,24 +157,29 @@ while ($row = mysqli_fetch_assoc($item)) {
    echo "<td>".$row["price"]."</td>";
    echo "<td>".$row["org_price"]."</td>";
    echo "<td>".$row["quantity"]."</td>";
-	if($row["quantity"]>0){
-		echo '
-		<td>
-		<div class="alert alert-success">
-  			<strong>YES</strong>
-		</div>
-		</td>';
-	}else{
-		echo '
-		<td>
-		<div class="alert alert-danger">
-  			<strong>NO</strong>
-		</div>
-		</td>';
-	}
+        if($row["quantity"]>0){
+                echo '
+                <td>
+                <div class="alert alert-success">
+                        <strong>YES</strong>
+                </div>
+                </td>';
+        }else{
+                echo '
+                <td>
+                <div class="alert alert-danger">
+                        <strong>NO</strong>
+                </div>
+                </td>';
+        }
    echo "</tr>";
-}
 
+
+
+
+
+}
+}
 ?> 
 </tbody>
 </table>
