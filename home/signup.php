@@ -45,14 +45,14 @@
    </div>
    <div class="form-group">
      <label class="control-label col-sm-2" for="pwd">Password:</label>
-      <div class="col-sm-10" id="password1"> 
-       <input type="email" class="form-control" name="password1"  placeholder="Enter password">
+      <div class="col-sm-10" id="pwd1"> 
+       <input type="password" class="form-control" name="pwd1"  placeholder="Enter password">
       </div>
    </div>
    <div class="form-group">
      <label class="control-label col-sm-2" for="pwd">Confirm Password:</label>
-      <div class="col-sm-10" id="password2"> 
-       <input type="email" class="form-control" name="password2"  placeholder="Confirm password">
+      <div class="col-sm-10" id="pwd2"> 
+       <input type="password" class="form-control" name="pwd2"  placeholder="Confirm password">
       </div>
    </div>
   
@@ -75,34 +75,25 @@
 	        return false;
 	    }
 	   
-	    var x = document.forms["form1"]["password1"].value;
-	   
-	    var emailReg = /(.+)@([^\.].*)\.([a-z]{2,})/;
-  			if (! emailReg.test(x)){
-  				alert("Please enter a valid email format");
-  			document.getElementById("password1").className="col-sm-10 has-error";
-
-  				return false;
-  			}
-	    var x = document.forms["form1"]["password1"].value;
+	    	    var x = document.forms["form1"]["pwd1"].value;
 	    if (x == "") {
 	        alert("Password must be filled out");
-	       	document.getElementById("password1").className="col-sm-10 has-error";
+	       	document.getElementById("pwd1").className="col-sm-10 has-error";
 	        return false;
 	    }
-	    var x = document.forms["form1"]["password2"].value;
+	    var x = document.forms["form1"]["pwd2"].value;
 	    if (x == "") {
 	        alert("Password must be confirmed");
-	       	document.getElementById("password2").className="col-sm-10 has-error";
+	       	document.getElementById("pwd2").className="col-sm-10 has-error";
 	        return false;
 	    }
 	    
-	    var y=document.forms["form1"]["password1"].value;
+	    var y=document.forms["form1"]["pwd1"].value;
 	    if(x!=y)//passwords don't match
 	    {
 	    	alert("Passwords must match");
-	       	document.getElementById("password2").className="col-sm-10 has-error";
-	        document.getElementById("password1").className="col-sm-10 has-error";
+	       	document.getElementById("pwd2").className="col-sm-10 has-error";
+	        document.getElementById("pwd1").className="col-sm-10 has-error";
 
 	        return false;
 	    }
