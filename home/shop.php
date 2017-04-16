@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +24,8 @@
     </div>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#"><i class="glyphicon glyphicon-shopping-cart"></i> My cart</a></li>
-      <li><a href="#"><i class="glyphicon glyphicon-usd"></i>10.00</a></li>
+ <li><a href="#"><i class="glyphicon glyphicon-usd"></i><?php echo $_SESSION['balance']?></a></li>
+            <li><a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Log Out</a></li>
      </ul>
   </div>
 </nav>

@@ -36,7 +36,7 @@
 <div class="container">
  <div class="jumbotron">
 
-  <form name="form1" role="form" class="form-horizontal" action="userhome.php" onsubmit="return validation(this)" method="post">
+  <form name="form1" role="form" class="form-horizontal" action="validate.php" onsubmit="return validation(this)" method="post">
   	<div class="form-group">
      <label class="control-label col-sm-2" for="name">Name</label>
       <div class="col-sm-10" id="name" >
