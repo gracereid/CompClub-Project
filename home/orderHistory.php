@@ -24,7 +24,7 @@
     <ul class="nav navbar-nav navbar-right">
     	
       <li><a href="#"><i class="glyphicon glyphicon-shopping-cart"></i> My cart</a></li>
-      <li><a href="#"><i class="glyphicon glyphicon-usd"></i><?php echo $_SESSION['balance']?></a></li>
+      <li><a href="#"><i class="glyphicon glyphicon-usd"></i><?php echo number_format($_SESSION['balance'],2)?></a></li>
             <li><a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Log Out</a></li>
 
      </ul>
@@ -45,9 +45,9 @@
            <ul class="nav nav-pills nav-stacked">
                <?php 
                $menuItems = array(1=>"My Account", 2=>"Returns", 3=>"Order History");
-              echo '<li class="active"><a href="userhome.php">'.$menuItems[1].'</a></li>';
+              echo '<li ><a href="userhome.php">'.$menuItems[1].'</a></li>';
               echo '<li><a href="#">'.$menuItems[2].'</a></li>';
-         	  echo '<li><a href="orderHistory.php">'.$menuItems[3].'</a></li>';
+         	  echo '<li class="active"><a href="orderHistory.php">'.$menuItems[3].'</a></li>';
 			   
 			  
                ?>
@@ -63,27 +63,51 @@
 <nav class="container">
   
 <div class="page-header">
-            <h2>My Account</h2>
-            <p>Welcome <?php echo $_SESSION['user']; ?></p>   
-         </div>    <p>At Western Michigan University</p>
-    We provide the best snaks at the best price, we make revenues bigly there is nobody that makes snaks as well as we do. 
+            <h2>My Order History</h2>
+           
  </nav>
 </div>
 
 
          
          <div class="well">
-            <p><?php 
-            	//echo 'Hello: ',$_POST['email'];
-				/*echo '<br><br>First Name: ',$_POST['fname'];
-				echo '<br><br>Last Name: ',$_POST['lname'];*/
-            	
-				
-				
-				 
-            	
-            	
-            	?></p>     
+           <div class="jumbotron">
+				  <table class="table table-striped">
+					
+				    <thead>
+				      <tr>
+					<th>Item</th>
+					<th>Price</th>
+				      </tr>
+				    </thead>
+				    <tbody>
+				      	<?php	$total=0;
+				      	if(isset($_SESSION['orderHistory']))
+						{
+					      
+					      	for($x=0; $x<count($_SESSION['orderHistory']); $x+=2)
+							{
+					      		echo '<tr>';
+								echo '<td>'.@$_SESSION['orderHistory'][$x][0].'</td>';
+								echo '<td>'.@$_SESSION['orderHistory'][$x+1][1].'</td>';
+								$total +=@$_SESSION['orderHistory'][$x+1][1];
+								
+								echo '</tr>';
+							}
+						}
+						else
+						{
+							echo '<tr>';
+								echo '<td>You have no order history.</td>';
+								
+							echo '</tr>';
+						}
+				      	?>
+				      	
+				      	
+				    </tbody>
+				  </table>  
+				  <h3>Total: $<?php echo number_format($total,2); ?></h3>
          </div>
       </div>  
    </div> 
