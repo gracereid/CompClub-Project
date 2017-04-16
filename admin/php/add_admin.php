@@ -19,7 +19,7 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <nav class="navbar navbar-inverse">
 <div class="container-fluid">
 <div class="navbar-header">
-<a class="navbar-brand" href="../../home/home.php">Cclub Shop</a>
+<a class="navbar-brand" href="../../home/shop.php">Cclub Shop</a>
 </div>
 <ul class="nav navbar-nav">
 <li class="dropdown">

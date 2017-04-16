@@ -31,7 +31,7 @@ CREATE TABLE customers(
 );
 
 CREATE TABLE products(
-	ID			INT		NOT NULL,
+	ID			BIGINT		NOT NULL,
 	name 			VARCHAR(20)	NOT NULL,
 	type 			VARCHAR(20)	NOT NULL,
 	price 			DECIMAL(3,2) 	NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE admin(
 
 CREATE TABLE sold(
 	sold_ID		INT		NOT NULL	 AUTO_INCREMENT,
-	ID		INT 		NOT NULL,
+	ID		BIGINT 		NOT NULL,
 	price		DECIMAL(3,2)	NOT NULL,
 	quantity	INT		NOT NULL,
 	date		DATE		NOT NULL,
