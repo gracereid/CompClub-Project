@@ -20,8 +20,6 @@
      <ul class="nav navbar-nav navbar-left">
        <li><a href="userhome.php"><i class="glyphicon glyphicon-user"></i> My Account</a></li>
 		</ul>
-      <li><a href="userhome.php"><i class="glyphicon glyphicon-user"></i> My Account</a></li>
-		</ul>
       
     </div>
     <ul class="nav navbar-nav navbar-right">
