@@ -1,4 +1,5 @@
-<?php session_start();?>
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,86 +43,42 @@
 <div class="container">
   <div class="row">
     <div class="table-responsive col-md-8">
-	      <h2>Cclub Snacks</h2>
-	  <p>
-		  <button type="button" class="btn btn-secondary">Beverages</button>
-		  <button type="button" class="btn btn-secondary">Candy</button>
-		  <button type="button" class="btn btn-secondary">Pastry/Cookies</button>
-		  <button type="button" class="btn btn-secondary">Salty Snacks</button>
-		  <button type="button" class="btn btn-secondary">Microwave Meals</button>
-	  </p>            
-	  <table class="table table-striped">
-	    <thead>
-	      <tr>
-		<th>Item</th>
-		<th>Price ($)</th>
-		<th></th>
-		<th></th>
-	      </tr>
-	    </thead>
-	    <tbody>
-	      
-	      	<?php 
-	      		try{
-					$connString = "mysql:host=localhost; dbname=Cclub_shop";
-					$user = "cclub";
-					$pass = "cclub"; 
-					$pdo = new PDO($connString, $user, $pass);
-					$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-					$sql='SELECT * FROM products';
-							$result = $pdo->query($sql);
-					while($row = $result->fetch())
-					{
-						echo '<tr>';
-						echo '<td>'.$row['name'].'</td>';
-						echo '<td>'.$row['price'].'</td>';
-						echo '<td></td>'; 
-						echo '<td><button type="button" class="btn btn-info btn-block" ><a href="buy.php?id='.$row['ID'].'"><span class="glyphicon glyphicon-flash"></span> Add to Cart</a>  </button></td>';
-						echo '</tr>';
-					}
-					$pdo=null;
-					}
-				catch(PDOException $e)
-				{
-					die ($e -> getMessage());
-				}
-		
-	      	?>
-		
-	    </tbody>
-	  </table>
+	      <h2>Cart</h2>
+	  
     </div>
-    <div class="table-responsive col-md-4">
 	<div class="jumbotron">
 	  <table class="table table-striped">
-		<h2>Cart</h2>
+		
 	    <thead>
 	      <tr>
 		<th>Item</th>
 		<th>Price</th>
-
-	      <?php
-	      if(isset($_SESSION['ShoppingCart']))
-		  {
+	      </tr>
+	    </thead>
+	    <tbody>
+	      	<?php
+	      	$total=0;
 	      	for($x=0; $x<count($_SESSION['ShoppingCart']); $x++)
 			{
 	      		echo '<tr>';
 				echo '<td>'.$_SESSION['ShoppingCart'][$x][1].'</td>';
 				echo '<td>'.$_SESSION['ShoppingCart'][$x][2].'</td>';
+				$total +=$_SESSION['ShoppingCart'][$x][2];
 				
 				echo '</tr>';
 			}
-		  }
-		  else {
-			  echo '<tr>';
-				echo '<td>Your cart is empty</td>';
-				echo '</tr>';
-		  }
 	      	?>
+	      	
+	      	
 	    </tbody>
 	  </table>
+	  <h3>Total: $<?php echo number_format($total,2);
+	  	$_SESSION['tempTotal']=$total;
+	  	
+	  	?></h3>
 	 <p>
-		  <button type="button" class="btn btn-danger btn-block"><a href="cart.php">Go To Cart</a></button>
+		  <button type="button" class="btn btn-danger btn-block"><a href="pay.php">Pay</a></button>
+		  <button type="button" class="btn btn-success btn-block"><a href="shop.php">Continue Shopping</a></button>
 		  <button type="button" class="btn btn-info btn-block"><a href="clear.php">Clear</a></button>
 
 	  </p>
@@ -136,3 +93,7 @@
 
 
 
+
+
+
+ 

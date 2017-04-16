@@ -11,31 +11,42 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head> 
  <body>
+ 	
+ 	<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="login.php">Cclub Shop</a>
+      
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+     </ul>
+  </div>
+</nav>
 <div class="jumbotron">
  <div class="container">
   <div class="page-header"> 
-   <h1>Cclub Log in</h1>
+   <h1>Cclub Log In</h1>
   </div>      
   <p>Food Food Food!</p>
  </div>
 </div>
 
-
+<?php session_start(); ?>
 
 <div class="container">
  <div class="jumbotron">
 
-  <form class="form-horizontal">
-   <div class="form-group">
-     <label class="control-label col-sm-2" for="email">User</label>
-      <div class="col-sm-10">
-       <input type="email" class="form-control" id="email" placeholder="Username is your email">
+  <form name="form1" role="form" class="form-horizontal" action="validate.php" onsubmit="return validation(this)" method="post">
+  	<div class="form-group">
+     <label class="control-label col-sm-2" for="name">Name</label>
+      <div class="col-sm-10" id="name" >
+       <input type="text" class="form-control" name="name" placeholder="Enter your name">
       </div>
    </div>
    <div class="form-group">
      <label class="control-label col-sm-2" for="pwd">Password:</label>
-      <div class="col-sm-10"> 
-       <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+      <div class="col-sm-10" id="password1"> 
+       <input type="email" class="form-control" name="password1"  placeholder="Enter password">
       </div>
    </div>
   
@@ -44,6 +55,44 @@
       <button type="submit" class="btn btn-default">Submit</button>
       Don't have an account? <a href="signup.php">Sign Up</a>
     </div>
+    
+    
+   
+    <script>
+   
+   function validation()
+   {
+   		var x = document.forms["form1"]["name"].value;
+   		
+	    if (x == "") {
+	        alert("Name must be filled out");
+	       	document.getElementById("name").className="col-sm-10 has-error";
+	        return false;
+	    }
+	   
+	    var x = document.forms["form1"]["password1"].value;
+	   
+	    var emailReg = /(.+)@([^\.].*)\.([a-z]{2,})/;
+  			if (! emailReg.test(x)){
+  				alert("Please enter a valid email format");
+  			document.getElementById("password1").className="col-sm-10 has-error";
+
+  				return false;
+  			}
+	    var x = document.forms["form1"]["password1"].value;
+	    if (x == "") {
+	        alert("Password must be filled out");
+	       	document.getElementById("password1").className="col-sm-10 has-error";
+	        return false;
+	    }
+	 
+	  
+	 
+   	
+   }
+   </script>
+    
+    
    </div>
   </form>
  </div>
