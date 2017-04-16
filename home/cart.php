@@ -17,15 +17,35 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="shop.php">Cclub Shop</a>
+      <a class="navbar-brand" href="shop.php"><i class="glyphicon glyphicon-home"></i> Cclub Shop</a>
      <ul class="nav navbar-nav navbar-left">
        <li><a href="userhome.php"><i class="glyphicon glyphicon-user"></i> My Account</a></li>
 		</ul>
       
     </div>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><i class="glyphicon glyphicon-shopping-cart"></i> My cart</a></li>
- <li><a href="#"><i class="glyphicon glyphicon-usd"></i><?php echo number_format($_SESSION['balance'],2)?></a></li>
+      <li><a href="cart.php"><i class="glyphicon glyphicon-shopping-cart"></i> My cart (<?php 
+      	if(isset($_SESSION['ShoppingCart']))
+		{
+      			echo count($_SESSION['ShoppingCart']);
+		}
+		else {
+			echo 0;
+		}
+      	?>)</a></li>
+ <li><a href="#"><i class="glyphicon glyphicon-usd"></i><?php
+ 		if(isset($_SESSION['ShoppingCart']))
+		{
+ 			@$tempTotal;
+			 for($x=0; $x<count($_SESSION['ShoppingCart']); $x++)//current cart total
+						{
+							@$tempTotal +=$_SESSION['ShoppingCart'][$x][2];
+						}
+			  echo @number_format(@$tempTotal,2);
+		}
+		else
+			echo @number_format(0,2);
+			  ?></a></li>
             <li><a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Log Out</a></li>
      </ul>
   </div>
@@ -57,23 +77,29 @@
 	    </thead>
 	    <tbody>
 	      	<?php
-	      	$total=0;
+	      	 if(isset($_SESSION['ShoppingCart']))
+		  {
 	      	for($x=0; $x<count($_SESSION['ShoppingCart']); $x++)
 			{
 	      		echo '<tr>';
 				echo '<td>'.$_SESSION['ShoppingCart'][$x][1].'</td>';
 				echo '<td>'.$_SESSION['ShoppingCart'][$x][2].'</td>';
-				$total +=$_SESSION['ShoppingCart'][$x][2];
 				
 				echo '</tr>';
 			}
-	      	?>
+	      	echo  '</tbody>';
+	 		echo  '</table>';
 	      	
-	      	
-	    </tbody>
-	  </table>
-	  <h3>Total: $<?php echo number_format($total,2);
-	  	$_SESSION['tempTotal']=$total;
+	      }
+	      else
+	      {
+	      	echo  '</tbody>';
+	 		echo  '</table>';
+	      	echo 'Your cart is empty.';
+	      }
+	      ?>
+	   
+	  <h3>Total: $<?php echo @number_format(@$tempTotal,2);
 	  	
 	  	?></h3>
 	 <p>
