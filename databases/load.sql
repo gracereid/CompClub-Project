@@ -42,11 +42,11 @@ CREATE TABLE products(
 );
 
 CREATE TABLE admin(
-	ID			INT			NOT NULL,
+	ID			INT			NOT NULL	AUTO_INCREMENT,
 	nick	 		VARCHAR(20)		NOT NULL,
 	position 		VARCHAR(20)		NOT NULL,
 	phone			VARCHAR(20)		NOT NULL,
-
+	UNIQUE KEY(nick),
 	PRIMARY KEY(ID)
 );
 

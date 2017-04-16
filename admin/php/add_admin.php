@@ -1,66 +1,92 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title> Add admin </title>
-  <meta charset="utf-8">
-  <meta name="viewport" content=""width=device-width, initial-scale=1">
-  <link rel="stylesheet" 
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<?php
+$db = new mysqli("localhost","cclub","cclub", "Cclub_shop");
+if($db->connect_errno){
+	die("Could not connect to database" . mysqli_connect_error());
+}
+?>
+<title> Add admin </title>
+<meta charset="utf-8">
+<meta name="viewport" content=""width=device-width, initial-scale=1">
+<link rel="stylesheet" 
+href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="../../home/home.html">Cclub Shop</a>
-    </div>
-    <ul class="nav navbar-nav">
-  <li class="dropdown">
-         <a class="active dropdown-toggle" data-toggle="dropdown">Admin
-         <span class="caret"></span></a>
-         <ul class="dropdown-menu">
-          <li><a href="./admin.html">Home</a></li>   
+<div class="container-fluid">
+<div class="navbar-header">
+<a class="navbar-brand" href="../../home/home.php">Cclub Shop</a>
+</div>
+<ul class="nav navbar-nav">
+<li class="dropdown">
+ <a class="active dropdown-toggle" data-toggle="dropdown">Admin
+ <span class="caret"></span></a>
+ <ul class="dropdown-menu">
+  <li><a href="./admin.php">Home</a></li>   
 
-  </ul>
-       </li>
-      <li><a href="./inventory.html">Inventory</a></li>
-      <li><a href="./revenue.html">Revenue</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
-    </ul>
-  </div>
+</ul>
+</li>
+<li><a href="./inventory.php">Inventory</a></li>
+<li><a href="./revenue.php">Revenue</a></li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+
+<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+</ul>
+</div>
 </nav>
 
 <nav class="container">
-  <div class="jumbotron">
-    <h1>Admin Access:</h1>      
-    <p>Cclub Shop at Western Michigan University</p>
+<div class="jumbotron">
+<h1>Admin Access:</h1>      
+<p>Cclub Shop at Western Michigan University</p>
 
 </div>
 
 </div>
 
 <div class="container-fluid">
-  <h2>Admin Table</h2>
-  <p>List of Current Administrators</p>            
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Nick:</th>
-        <th>Poistion:</th>
-        <th>Phone:</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Kami</td>
-        <td>Creator</td>
-        <td>(269)779-0318</td>
-      </tr>
-    </tbody>
+<h2>Admin Table</h2>
+<p>List of Current Administrators</p>            
+<table class="table">
+<thead>
+<tr>
+<th>Nick:</th>
+<th>Poistion:</th>
+<th>Phone:</th>
+</tr>
+</thead>
+<tbody>
+<?php
+ $print = $db->query("SELECT nick, position, phone FROM admin");
+ if(!$print){
+        die($db->error);
+ }
+
+if(mysqli_num_rows($print)>0){
+	while ($row = mysqli_fetch_assoc($print)) {
+	   echo "<tr>";
+	   echo "<td>".$row["nick"]."</td>";
+	   echo "<td>".$row["position"]."</td>";
+	   echo "<td>".$row["phone"]."</td>";
+	   echo "</tr>";
+	}
+}else{
+echo '
+<div class="alert alert-warning">
+  <strong>Warning!</strong> No admins foound.
+</div>
+';
+}
+
+
+?>
+    
+   </tbody>
   </table>
 </div>
 
@@ -73,35 +99,109 @@
       </table>
  </p>
 <script src="../js/add_admin.js" type="text/javascript"></script>
- <div id="t1"> 
-  <form class="form-inline">
-  <label class="sr-only " for="inlineFormInput">ID</label>
-  <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="ID">
+ <div id="t1">
 
-<select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-    <option selected>Type</option>
+
+
+
+<form method="post" class="form-inline">
+  <label class="sr-only" for="inlineFormInput">Nick</label>
+  <input name="nick" type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Nick">
+  <select name="pos" class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+    <option value="cre" selected>Creator</option>
     <option value="trr">Treasurer</option>
-    <option value="vpo">Vp of Ops</option>
+    <option value="vop">Vp of Ops</option>
     <option value="mem">Member</option>
-
+    
   </select>
-       
-  <label class="sr-only " for="inlineFormInput">ID</label>
-  <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="(000)000-0000">
 
-  <button type="add" class="btn btn-primary">add</button>
- </form>
+  <label  class="sr-only" for="inlineFormInput">Phone</label>
+  <input name="num" type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Phone">
 
 
- </div>
+  <button type="submit" class="btn btn-info">Submit</button>
+</form>
+ 
+
+<?php     
+if(!empty($_POST["nick"]) || !empty($_POST["phone"])){
+if($_POST["pos"]==="cre"){
+$add = "INSERT INTO admin (nick,position, phone)
+VALUES ('".$_POST["nick"]."','Creator','".$_POST["num"]."')";
+
+
+}else if($_POST["pos"]==="trr"){
+$add = "INSERT INTO admin (nick,position, phone)
+VALUES ('".$_POST["nick"]."','Treasurer','".$_POST["num"]."')";
+
+
+}else if($_POST["pos"]==="mem"){
+$add = "INSERT INTO admin (nick,position, phone)
+VALUES ('".$_POST["nick"]."','Member','".$_POST["num"]."')";
+
+
+} else{
+$add = "INSERT INTO admin (nick,position, phone)
+VALUES ('".$_POST["nick"]."','Vp of Ops','".$_POST["num"]."')";
+
+
+}
+
+
+$chk = "SELECT * FROM admin WHERE nick='".$_POST["nick"]."'";
+
+$chk_res = $db->query($chk);
+if(!$chk_res){
+	die($db->error);
+}
+if(mysqli_fetch_assoc($chk_res)==TRUE){
+echo '<script type="text/javascript">
+$(document).ready(function() {
+        show(1);
+});
+</script>' ;
+echo "
+    <div class='alert alert-danger'>
+    <strong>Stop! </strong>This admin is already in the list.</div>
+     ";
+} else {
+$add_res = $db->query($add);
+if(!$add_res){
+	die($db->error);
+} else {
+echo "<script>window.location.href = \"add_admin.php\";</script>";
+}
+}
+}
+
+
+
+?>
+
+
+
+
+</div>
 
  <div id="t2"> 
-  <form class="form-inline">
+  <form method="post" class="form-inline">
 
   <label class="sr-only " for="inlineFormInput">Nick</label>
-  <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Nick">
+  <input name="rem" type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Nick">
+<?php
+	if (!empty($_POST["rem"])){
+		$rem = "DELETE FROM admin WHERE nick='".$_POST["rem"]."'";
+		$rem_res = $db->query($rem);
+		if(!$rem_res){
+			die($db->error);
+		}else{
+			echo "<script>window.location.href = \"add_admin.php\";</script>";
+		}
+	}
 
-  <button type="rem" class="btn btn-danger">remove</button>
+
+?>
+  <button type="submi" class="btn btn-danger">remove</button>
  </form>
 
 

@@ -4,7 +4,7 @@
 <?php
 	$db = new mysqli("localhost", "cclub", "cclub", "Cclub_shop");
 	if ($db->connect_errno) {
-	die("could not connect to database: " . mysqli_connect_error());
+		die("Could not connect to database: " . mysqli_connect_error());
 	}
 
 ?>
@@ -171,14 +171,9 @@ while ($row = mysqli_fetch_assoc($item)) {
                         <strong>NO</strong>
                 </div>
                 </td>';
-        }
+        	}
    echo "</tr>";
-
-
-
-
-
-}
+	}
 }
 ?> 
 </tbody>
