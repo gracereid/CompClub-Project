@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+<?php
+        $db = new mysqli("localhost", "cclub", "cclub", "Cclub_shop");
+        if ($db->connect_errno) {
+        die("could not connect to database: " . mysqli_connect_error());
+        }
+
+?>
+
   <title> Add admin </title>
   <meta charset="utf-8">
   <meta name="viewport" content=""width=device-width, initial-scale=1">
@@ -13,19 +21,19 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="../../home/home.html">Cclub Shop</a>
+      <a class="navbar-brand" href="../../home/shop.php">Cclub Shop</a>
     </div>
     <ul class="nav navbar-nav">
   <li class="dropdown">
          <a class="active dropdown-toggle" data-toggle="dropdown">Admin
          <span class="caret"></span></a>
          <ul class="dropdown-menu">
-          <li><a href="./admin.html">Home</a></li>
-          <li><a href="./add_admin.html">Add Admin</a></li>      
+          <li><a href="./admin.php">Home</a></li>
+          <li><a href="./add_admin.php">Add Admin</a></li>      
 
   </ul>
        </li>
-      <li><a href="./inventory.html">Inventory</a></li>
+      <li><a href="./inventory.php">Inventory</a></li>
       <li class="active"><a>Revenue</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
@@ -34,19 +42,32 @@
   </div>
 </nav>
 
-<nav class="container">
+<div class="container">
   <div class="jumbotron">
     <h1>Revenues:</h1>      
     <p>Cclub Shop at Western Michigan University</p>
     "Money money money money"
-</div>
+  </div>
+<?php
+        $item = $db->query("SELECT * FROM products");
+	$sold = $db->query("SELECT * FROM sold");
 
-</div>
+        if(!$item){
+                die($db->error);
+        }
+        $sold = $db->query("SELECT sold.ID AS ID,name,type, sold.price AS price,sold.quantity AS quantity, date FROM sold INNER JOIN products ON products.ID=sold.ID");
 
-<div class="container-fluid">
-  <h2>Snack Invesment:</h2>
-  <p>Original money put into snack:</p>            
-  <table class="table">
+        if(!$sold){
+                die($db->error);
+        }
+
+
+?>
+
+  <div class="container-fluid">
+   <h2>Snack Invesment:</h2>
+   <p>Original money put into snack:</p>            
+   <table class="table">
     <thead>
       <tr>
         <th>Number of Items:</th>
@@ -67,7 +88,7 @@
 
       </tr>
     </tbody>
-  </table>
+   </table>
 </div>
 
   <p>  
