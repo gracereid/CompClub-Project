@@ -51,7 +51,7 @@ CREATE TABLE admin(
 );
 
 CREATE TABLE sold(
-	sold_ID		INT		NOT NULL,
+	sold_ID		INT		NOT NULL	 AUTO_INCREMENT,
 	ID		INT 		NOT NULL,
 	price		DECIMAL(3,2)	NOT NULL,
 	quantity	INT		NOT NULL,
@@ -61,9 +61,11 @@ CREATE TABLE sold(
 );
 
 CREATE TABLE report(
-	ID			INT			NOT NULL,
+	ID			INT			NOT NULL	 AUTO_INCREMENT,
 	invesment		DECIMAL(4,2)		NOT NULL,
-	revenew			DECIMAL(4,2)		NOT NULL,
+        itemsb			INT			NOT NULL,
+	revenue			DECIMAL(4,2)		NOT NULL,
+        itemss                  INT                     NOT NULL,
 	type 			VARCHAR(20)		NOT NULL,
 	date			DATE			NOT NULL,
 

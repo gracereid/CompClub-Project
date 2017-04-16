@@ -49,13 +49,14 @@
     "Money money money money"
   </div>
 <?php
-        $item = $db->query("SELECT * FROM products");
-	$sold = $db->query("SELECT * FROM sold");
+        $sold = $db->query("SELECT SUM(sold.quantity) AS sold_i,SUM(sold.price) AS sold_r
+FROM sold;");
+	$pur = $db->query("SELECT SUM(products.quantity) AS pro_i,SUM(products.price) AS pro_r
+FROM products;");
 
-        if(!$item){
+        if(!$pur){
                 die($db->error);
         }
-        $sold = $db->query("SELECT sold.ID AS ID,name,type, sold.price AS price,sold.quantity AS quantity, date FROM sold INNER JOIN products ON products.ID=sold.ID");
 
         if(!$sold){
                 die($db->error);
@@ -79,22 +80,73 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>20</td>
-        <td>20.30</td>
-        <td>17</td>
-        <td>20.50</td>
-        <td>04/15/17</td>
+<form method="GET">  
+<?php
+if($pur){ $row = mysqli_fetch_assoc($pur);
+	   echo "<tr>"; 
+	   echo "<td>".$row["pro_i"]."</td>";
+	   echo "<td>".$row["pro_r"]."</td>";
+	echo '<input type="hidden" name="pro_i" value="'.$row["pro_i"].'"/>';
+    	echo '<input type="hidden" name="pro_r" value="'.$row["pro_r"].'"/>';
 
-      </tr>
+}else{
+	   echo "<tr>";
+           echo "<td></td>";
+           echo "<td></td>";
+
+}
+if($sold){ $row = mysqli_fetch_assoc($sold);
+   echo "<td>".$row["sold_i"]."</td>";
+   echo "<td>".$row["sold_r"]."</td>";
+   echo "<td>".$today = date("n,j,Y")."</td>";
+ 	echo '<input type="hidden" name="sold_i" value="'.$row["sold_i"].'"/>';
+	echo '<input type="hidden" name="sold_r" value="'.$row["sold_r"].'"/>';
+
+   echo "</tr>";
+} else{
+   echo "<td></td>";
+   echo "<td></td>";
+   echo "<td></td>";
+   echo "</tr>";
+
+}
+
+if(isset($_GET["pro_i"]) &&
+isset($_GET["sold_i"]))
+{
+
+	$sql = "INSERT INTO report (invesment,itemsb,revenue,itemss,type,date)
+	VALUES (".$_GET["pro_r"].",".$_GET["pro_i"].",".$_GET["sold_r"].",".$_GET["sold_i"].",'not plan',NOW())";
+	$sql2 =  "SELECT * FROM report WHERE date=NOW()";
+
+	if ($db->query($sql2)===FALSE){ 	
+	if ($db->query($sql) === TRUE) {
+	    echo "
+		<div class='alert alert-success'>
+  		<strong>Added!</strong> Your record was added to the database.</div>
+		";
+	} else {
+	    echo "Error: " . $sql . "<br>" . $db->error;
+	}
+}else{
+	         echo "
+                <div class='alert alert-danger'>
+                <strong>Stop!</strong> A record for this day alreayd exists</div>
+                ";
+}
+
+
+}
+?>
     </tbody>
    </table>
 </div>
 
-  <p>  
-     
-     <button type="button" class="btn btn-success btn-lg btn-block btn-lg btn pull-left">Save Report</button>
-     
+  <p>
+
+
+<button type="submit" class="btn btn-success btn-lg btn-block btn-lg btn pull-left">Save Report</button>
+</form>     
  </p>
 
 
