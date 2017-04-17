@@ -22,8 +22,10 @@ if(!isset($_POST['pwd2']))//not from signup
 					$sql='SELECT * FROM customers where name="'.$userIn.'"';
 							$result = $pdo->query($sql);
 					echo '</br>'.$sql.'<br>';
+					
 					$row = $result->fetch();
 						$userPassword = $row['ID'];
+						echo '<br>Actual pass = '.$userPassword;
 					$_SESSION['user']=$userIn;
 			$_SESSION['balance']=0;
 					$pdo=null;
@@ -33,10 +35,20 @@ if(!isset($_POST['pwd2']))//not from signup
 					die ($e -> getMessage());
 				}
 		
-		if(password_verify($userPassIn,$userPassword))
+		if($userPassIn==$userPassword)
 		{
-			//echo "hi";
-			 header( 'Location: userhome.php' ) ;
+			echo 'type = '.$row['type'];
+			if($row['type']=="m")//member
+			{
+				//echo "hi";
+				 header( 'Location: userhome.php' ) ;
+				 $_SESSION['type']="m";
+			}
+			else if($row['type']=="a")//admin
+			{
+				 header( 'Location: ../admin/php/admin.php' ) ;
+				 $_SESSION['type']="a";
+			}
 			
 		}
 		else {
@@ -80,10 +92,13 @@ else //from signup
 				echo '<br>user = '.$userIn;
 			$_SESSION['user']=$userIn;
 			$_SESSION['balance']=0;
+			$_SESSION['type']="m";
 			
 							echo '<br>session = '.$_SESSION['user'];
+														echo '<br>type = '.$_SESSION['type'];
+							
 			
-			 header( 'Location: userhome.php' ) ;
+				header( 'Location: userhome.php' ) ;
 			
 		
 		

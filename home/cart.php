@@ -21,6 +21,23 @@
      <ul class="nav navbar-nav navbar-left">
        <li><a href="userhome.php"><i class="glyphicon glyphicon-user"></i> My Account</a></li>
 		</ul>
+      <?php
+			if($_SESSION['type']=="a")//admin
+			{
+				echo 		'<ul class="nav navbar-nav">';
+				echo			'<li class="dropdown">';
+			    echo			'     <a class="active dropdown-toggle" data-toggle="dropdown">Admin';
+			    echo			'     <span class="caret"></span></a>';
+			    echo			'     <ul class="dropdown-menu">';
+			    echo			'      <li><a href="../admin/php/add_admin.php">Add Admin</a></li>';
+				echo			'</ul>';
+			    echo			'   </li>';
+			    echo			'  <li><a href="../admin/php/inventory.php">Inventory</a></li>';
+			    echo			'  <li><a href="../admin/php/revenue.php">Revenue</a></li>';
+			    echo			'</ul>';
+			}
+			echo 'tyep = '.$_SESSION['type'];
+		?>
       
     </div>
     <ul class="nav navbar-nav navbar-right">

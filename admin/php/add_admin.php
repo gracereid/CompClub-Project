@@ -19,8 +19,11 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <nav class="navbar navbar-inverse">
 <div class="container-fluid">
 <div class="navbar-header">
-<a class="navbar-brand" href="../../home/shop.php">Cclub Shop</a>
+<a class="navbar-brand" href="../../home/shop.php"><i class="glyphicon glyphicon-home"></i> Cclub Shop</a>
 </div>
+<ul class="nav navbar-nav navbar-left">
+       <li><a href="../../home/userhome.php"><i class="glyphicon glyphicon-user"></i> My Account</a></li>
+		</ul>
 <ul class="nav navbar-nav">
 <li class="dropdown">
  <a class="active dropdown-toggle" data-toggle="dropdown">Admin
@@ -34,7 +37,28 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <li><a href="./revenue.php">Revenue</a></li>
 </ul>
 <ul class="nav navbar-nav navbar-right">
-
+<li><a href="cart.php"><i class="glyphicon glyphicon-shopping-cart"></i> My cart (<?php 
+      	if(isset($_SESSION['ShoppingCart']))
+		{
+      			echo count($_SESSION['ShoppingCart']);
+		}
+		else {
+			echo 0;
+		}
+      	?>)</a></li>
+ <li><a href="#"><i class="glyphicon glyphicon-usd"></i><?php
+ 		if(isset($_SESSION['ShoppingCart']))
+		{
+ 			@$tempTotal;
+			 for($x=0; $x<count($_SESSION['ShoppingCart']); $x++)//current cart total
+						{
+							@$tempTotal +=$_SESSION['ShoppingCart'][$x][2];
+						}
+			  echo @number_format(@$tempTotal,2);
+		}
+		else
+			echo @number_format(0,2);
+			  ?></a></li>
 <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
 </ul>
 </div>
