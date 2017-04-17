@@ -132,10 +132,20 @@ if(!empty($_POST["type"])
 && !empty($_POST["cp"])
 && !empty($_POST["qua"])
 ){
-	$add = "INSERT INTO products VALUES (".$_POST["bar"].",'".$_POST["brand"]."','".$_POST["type"]."',".$_POST["cp"].",".$_POST["orp"].",".$_POST["qua"].")";
-
-        $add_res = $db->query($add);
-	if(!$add_res){
+		$add_res;
+		$check = "SELECT * FROM products where id=".$_POST["bar"];
+		$check_res = $db->query($check);
+		if($row = mysqli_fetch_assoc($check_res))
+		{
+			$update = "UPDATE products set quantity=quantity+".$_POST['qua'];
+			$update_res = $db->query($update);
+		}
+		else {
+			$add = "INSERT INTO products VALUES (".$_POST["bar"].",'".$_POST["brand"]."','".$_POST["type"]."',".$_POST["cp"].",".$_POST["orp"].",".$_POST["qua"].")";
+       		 $add_res = $db->query($add);
+		}
+		
+	if(!@$add_res){
 		echo $db->error;
 	}
         echo
