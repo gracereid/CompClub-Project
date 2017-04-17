@@ -79,13 +79,13 @@
   <div class="row">
     <div class="table-responsive col-md-8">
 	      <h2>Cclub Snacks</h2>
-	  <p>
+	  <!--<p>
 		  <button type="button" class="btn btn-secondary">Beverages</button>
 		  <button type="button" class="btn btn-secondary">Candy</button>
 		  <button type="button" class="btn btn-secondary">Pastry/Cookies</button>
 		  <button type="button" class="btn btn-secondary">Salty Snacks</button>
 		  <button type="button" class="btn btn-secondary">Microwave Meals</button>
-	  </p>            
+	  </p> -->          
 	  <table class="table table-striped">
 	    <thead>
 	      <tr>

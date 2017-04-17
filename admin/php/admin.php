@@ -3,6 +3,7 @@
 <head>
 
 <?php
+session_start();
 	$db = new mysqli("localhost", "cclub", "cclub", "Cclub_shop");
 	if ($db->connect_errno) {
 		die("Could not connect to database: " . mysqli_connect_error());
@@ -48,7 +49,7 @@
       <li><a href="./revenue.php">Revenue</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-     <li><a href="cart.php"><i class="glyphicon glyphicon-shopping-cart"></i> My cart (<?php 
+     <li><a href="../../home/cart.php"><i class="glyphicon glyphicon-shopping-cart"></i> My cart (<?php 
       	if(isset($_SESSION['ShoppingCart']))
 		{
       			echo count($_SESSION['ShoppingCart']);
@@ -135,6 +136,7 @@ if(!empty($_POST["type"])
 		$check_res = $db->query($check);
 		if($row = mysqli_fetch_assoc($check_res))
 		{
+			$row = mysqli_fetch_assoc($check_res);
 			$update = "UPDATE products set quantity=quantity+".$_POST['qua'];
 			$update_res = $db->query($update);
 		}
