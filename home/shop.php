@@ -96,7 +96,7 @@
 						echo '<td>'.$row['name'].'</td>';
 						echo '<td>'.$row['price'].'</td>';
 						echo '<td></td>'; 
-						echo '<td><button type="button" class="btn btn-info btn-block" ><a href="buy.php?id='.$row['ID'].'"><span class="glyphicon glyphicon-flash"></span> Add to Cart</a>  </button></td>';
+						echo '<td><a href="buy.php?id='.$row['ID'].'"  type="button" class="btn btn-info btn-block" ><span class="glyphicon glyphicon-flash"></span> Add to Cart</a> </td>';
 						echo '</tr>';
 					}
 					$pdo=null;
@@ -141,8 +141,8 @@
 	    </tbody>
 	  </table>
 	 <p>
-		  <button type="button" class="btn btn-danger btn-block"><a href="cart.php">Go To Cart</a></button>
-		  <button type="button" class="btn btn-info btn-block"><a href="clear.php">Clear</a></button>
+		  <a href="cart.php" type="button" class="btn btn-danger btn-block">Go To Cart</a>
+		  <a href="clear.php" type="button" class="btn btn-info btn-block">Clear</a>
 
 	  </p>
 	</div>
