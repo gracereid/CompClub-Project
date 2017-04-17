@@ -36,6 +36,8 @@
          <a class="active dropdown-toggle" data-toggle="dropdown">Admin
          <span class="caret"></span></a>
          <ul class="dropdown-menu">
+         	          <li><a href="./admin.php">Home</a></li>
+
           <li><a href="./add_admin.php">Add Admin</a></li>
         
 

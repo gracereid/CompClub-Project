@@ -29,6 +29,8 @@
 			    echo			'     <a class="active dropdown-toggle" data-toggle="dropdown">Admin';
 			    echo			'     <span class="caret"></span></a>';
 			    echo			'     <ul class="dropdown-menu">';
+			    echo			'      <li><a href="../admin/php/admin.php">Home</a></li>';
+				
 			    echo			'      <li><a href="../admin/php/add_admin.php">Add Admin</a></li>';
 				echo			'</ul>';
 			    echo			'   </li>';

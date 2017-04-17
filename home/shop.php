@@ -28,6 +28,7 @@
 			    echo			'     <a class="active dropdown-toggle" data-toggle="dropdown">Admin';
 			    echo			'     <span class="caret"></span></a>';
 			    echo			'     <ul class="dropdown-menu">';
+			    echo			'      <li><a href="../admin/php/admin.php">Home</a></li>';
 			    echo			'      <li><a href="../admin/php/add_admin.php">Add Admin</a></li>';
 				echo			'</ul>';
 			    echo			'   </li>';
@@ -111,7 +112,13 @@
 						echo '<td>'.$row['name'].'</td>';
 						echo '<td>'.$row['price'].'</td>';
 						echo '<td></td>'; 
-						echo '<td><a href="buy.php?id='.$row['ID'].'"  type="button" class="btn btn-info btn-block" ><span class="glyphicon glyphicon-flash"></span> Add to Cart</a> </td>';
+						if($row['quantity']>0)
+						{
+							echo '<td><a href="buy.php?id='.$row['ID'].'"  type="button" class="btn btn-info btn-block" ><span class="glyphicon glyphicon-flash"></span> Add to Cart</a> </td>';
+						}
+						else {
+							echo '<td><span  type="button" class="btn btn-danger btn-block" >SOLD OUT</span> </td>';
+						}
 						echo '</tr>';
 					}
 					$pdo=null;
