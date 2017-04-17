@@ -33,7 +33,7 @@ session_start();
          <span class="caret"></span></a>
          <ul class="dropdown-menu">
           <li><a href="./admin.php">Home</a></li>
-          <li><a href="./add_admin.php">Add Admin</a></li>      
+          <li><a href="./admin.php">Add Admin</a></li>      
 
   </ul>
        </li>
@@ -106,7 +106,7 @@ session_start();
 </div>
 
 <div class="container-fluid">
-<script src="../js/add_admin.js" type="text/javascript"></script>
+<script src="../js/admin.js" type="text/javascript"></script>
 <?php
 	$item = $db->query("SELECT * FROM products");
 

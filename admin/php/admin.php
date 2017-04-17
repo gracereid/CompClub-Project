@@ -88,7 +88,9 @@ session_start();
  
     <button id="more" type="button" onclick="show(1)" class="btn btn-scondary btn-lg btn-block">
     Add Item</button>  
-    <button type="button" onclick="show(2)" class="btn btn-danger btn-lg btn-block">Remove Item</button>
+     <button id="more" type="button" onclick="show(3)" class="btn btn-scondary btn-lg btn-block">
+    Re-Stock</button>  
+   <button type="button" onclick="show(2)" class="btn btn-danger btn-lg btn-block">Remove Item</button>
  </p>
  <script src="../js/add_admin.js" type="text/javascript"></script>      
  <div id="t1"> 
@@ -252,6 +254,69 @@ if(!empty($_POST["rem"])){
 
 
 </div>
+
+<div id="t3"> 
+	  <form method="post" class="form-inline">
+	  <label class="sr-only " for="inlineFormInput">Quantity</label>
+	  <input name="add" type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Ammount">
+	  <label class="sr-only " for="inlineFormInput">ID</label>
+	  <input name="find" type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Bar Code">
+	 
+
+	  <button type="submit" class="btn btn-info">Re-Stock</button>
+	 </form>
+</div>
+<?php
+
+
+if(!empty($_POST["add"])&& !empty($_POST["find"])){
+	$find = "SELECT * FROM products WHERE ID='".$_POST["find"]."'";
+	$add  = "UPDATE products SET quantity=quantity+".$_POST["add"]." WHERE ID='".$_POST["find"]."'";
+	
+	
+	$find_res = $db->query($find);
+	if ($find_res==TRUE){
+		$add_res = $db->query($add);
+		
+	}
+
+	echo 
+		'<script type="text/javascript">
+		$(document).ready(function() {
+			show(3);
+		}); </script>';
+		
+	if($db->affected_rows==0){
+		echo '
+		<p>
+		<div class="alert alert-danger alert-dismissable">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+		<strong> Item not found.</strong> 
+		</div>
+		</p>
+		';	
+	}else{
+		echo '
+		<div class="alert alert-success alert-dismissable">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+		<strong>Success!</strong> 
+		</div>
+		';	
+	}
+}
+
+?> 
+
+
+
+
+</div>
+
+
+
+
+
+
 </body>
 </html>
 

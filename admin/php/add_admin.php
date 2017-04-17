@@ -124,7 +124,7 @@ echo '
       </thead>
       </table>
  </p>
-<script src="../js/add_admin.js" type="text/javascript"></script>
+<script src="../js/admin.js" type="text/javascript"></script>
  <div id="t1">
 
 
