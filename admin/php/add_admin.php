@@ -3,7 +3,6 @@
 <head>
 <?php
 session_start();
-
 $db = new mysqli("localhost","cclub","cclub", "Cclub_shop");
 if($db->connect_errno){
 	die("Could not connect to database" . mysqli_connect_error());
@@ -32,7 +31,6 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
  <span class="caret"></span></a>
  <ul class="dropdown-menu">
   <li><a href="./admin.php">Home</a></li>   
-
 </ul>
 </li>
 <li><a href="./inventory.php">Inventory</a></li>
@@ -65,16 +63,12 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </ul>
 </div>
 </nav>
-
 <nav class="container">
 <div class="jumbotron">
 <h1>Admin Access:</h1>      
 <p>Cclub Shop at Western Michigan University</p>
-
 </div>
-
 </div>
-
 <div class="container-fluid">
 <h2>Admin Table</h2>
 <p>List of Current Administrators</p>            
@@ -92,7 +86,6 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
  if(!$print){
         die($db->error);
  }
-
 if(mysqli_num_rows($print)>0){
 	while ($row = mysqli_fetch_assoc($print)) {
 	   echo "<tr>";
@@ -154,28 +147,17 @@ if(!empty($_POST["nick"]) || !empty($_POST["phone"])){
 if($_POST["pos"]==="cre"){
 $add = "INSERT INTO admin (nick,position, phone)
 VALUES ('".$_POST["nick"]."','Creator','".$_POST["num"]."')";
-
-
 }else if($_POST["pos"]==="trr"){
 $add = "INSERT INTO admin (nick,position, phone)
 VALUES ('".$_POST["nick"]."','Treasurer','".$_POST["num"]."')";
-
-
 }else if($_POST["pos"]==="mem"){
 $add = "INSERT INTO admin (nick,position, phone)
 VALUES ('".$_POST["nick"]."','Member','".$_POST["num"]."')";
-
-
 } else{
 $add = "INSERT INTO admin (nick,position, phone)
 VALUES ('".$_POST["nick"]."','Vp of Ops','".$_POST["num"]."')";
-
-
 }
-
-
 $chk = "SELECT * FROM admin WHERE nick='".$_POST["nick"]."'";
-
 $chk_res = $db->query($chk);
 if(!$chk_res){
 	die($db->error);
@@ -192,6 +174,9 @@ echo "
      ";
 } else {
 $add_res = $db->query($add);
+$update = "Update customers SET type='a' WHERE name='".$_POST["nick"]."'";
+$update_res = $db->query($update);
+
 if(!$add_res){
 	die($db->error);
 } else {
@@ -199,9 +184,6 @@ echo "<script>window.location.href = \"add_admin.php\";</script>";
 }
 }
 }
-
-
-
 ?>
 
 
@@ -218,14 +200,16 @@ echo "<script>window.location.href = \"add_admin.php\";</script>";
 	if (!empty($_POST["rem"])){
 		$rem = "DELETE FROM admin WHERE nick='".$_POST["rem"]."'";
 		$rem_res = $db->query($rem);
+		$upd= "Update customers SET type='m' WHERE name='".$_POST["rem"]."'";
+		$update_res = $db->query($upd);
+
+
 		if(!$rem_res){
 			die($db->error);
 		}else{
 			echo "<script>window.location.href = \"add_admin.php\";</script>";
 		}
 	}
-
-
 ?>
   <button type="submi" class="btn btn-danger">remove</button>
  </form>
@@ -237,4 +221,3 @@ echo "<script>window.location.href = \"add_admin.php\";</script>";
 
 
 </html>
-

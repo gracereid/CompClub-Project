@@ -76,14 +76,12 @@ session_start();
   </div>
 </nav>
 
-<nav class="container">
+<div class="container">
   <div class="jumbotron">
     <h1>Welcome:</h1>      
     <p>Cclub Shop at Western Michigan University</p>
 	Please Fill all the information before scanning the item.
-	 	
-
-</div>
+  </div>
   <p>
  
     <button id="more" type="button" onclick="show(1)" class="btn btn-scondary btn-lg btn-block">
@@ -122,7 +120,7 @@ session_start();
 	  <button type="submit" class="btn btn-primary">Submit</button>
 	</form>
 
-
+</div>
 <?php
 
 
@@ -197,7 +195,7 @@ if(!empty($_POST["type"])
 ?>
 
 
-</div>
+
 
 
 
@@ -253,7 +251,7 @@ if(!empty($_POST["rem"])){
 
 
 
-</div>
+
 
 <div id="t3"> 
 	  <form method="post" class="form-inline">
@@ -286,7 +284,7 @@ if(!empty($_POST["add"])&& !empty($_POST["find"])){
 			show(3);
 		}); </script>';
 		
-	if($db->affected_rows==0){
+	if(mysqli_num_rows($find)<=0){
 		echo '
 		<p>
 		<div class="alert alert-danger alert-dismissable">
@@ -310,13 +308,13 @@ if(!empty($_POST["add"])&& !empty($_POST["find"])){
 
 
 
+
+
+
+
+
+
 </div>
-
-
-
-
-
-
 </body>
 </html>
 
