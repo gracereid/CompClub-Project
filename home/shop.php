@@ -91,7 +91,7 @@
 	      <tr>
 		<th>Item</th>
 		<th>Price ($)</th>
-		<th></th>
+		<th>Quantity</th>
 		<th></th>
 	      </tr>
 	    </thead>
@@ -111,7 +111,7 @@
 						echo '<tr>';
 						echo '<td>'.$row['name'].'</td>';
 						echo '<td>'.$row['price'].'</td>';
-						echo '<td></td>'; 
+						echo '<td>'.$row['quantity'].'</td>'; 
 						if($row['quantity']>0)
 						{
 							echo '<td><a href="buy.php?id='.$row['ID'].'"  type="button" class="btn btn-info btn-block" ><span class="glyphicon glyphicon-flash"></span> Add to Cart</a> </td>';
