@@ -62,7 +62,7 @@
 		else
 			echo @number_format(0,2);
 			  ?></a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+      <li><a href="../../home/login.php"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
     </ul>
   </div>
 </nav>

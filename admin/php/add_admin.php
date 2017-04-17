@@ -59,7 +59,7 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		else
 			echo @number_format(0,2);
 			  ?></a></li>
-<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+      <li><a href="../../home/login.php"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
 </ul>
 </div>
 </nav>
