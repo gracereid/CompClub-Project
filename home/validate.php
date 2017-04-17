@@ -1,7 +1,7 @@
  
 <?php 
 session_start();
-if(!isset($_POST['password2']))//not from signup
+if(!isset($_POST['pwd2']))//not from signup
 {
 	if(isset($_POST['name']))
 	{
@@ -14,7 +14,7 @@ if(!isset($_POST['password2']))//not from signup
 					$pdo = new PDO($connString, $user, $pass);
 					$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					$userIn = $_POST['name'];
-					$userPassIn = $_POST['password1'];
+					$userPassIn = $_POST['pwd1'];
 					echo '<br>user = '.$userIn;
 					echo '<br>pass = '.$userPassIn;
 				
@@ -59,14 +59,18 @@ else //from signup
 					$pdo = new PDO($connString, $user, $pass);
 					$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					$userIn = $_POST['name'];
-					$userPassIn = $_POST['password1'];
-					echo '<br>user = '.$userIn;
-					echo '<br>pass = '.$userPassIn;
+					$userPassIn = password_hash( $_POST['pwd1'], PASSWORD_DEFAULT);
 				
 		
-					$sql='INSERT INTO customers (id, name, balance, type) values ("'.$userPassIn.'","'.$userIn.'",0.00,"a")';
-					$result = $pdo->query($sql);
-					
+					$sql='INSERT INTO customers (id, name, balance, type) values ("'.$userPassIn.'","'.$userIn.'",0.00,"m")';
+					$check = "SELECT COUNT(*) FROM customers WHERE name='".$userIn."'";
+					$check_res = $pdo->query($check);
+					if($check_res->fetchColumn() <= 0){
+						$result = $pdo->query($sql);
+					}else{
+						header('location: signup.php');
+						exit();
+					}
 					$pdo=null;
 					}
 				catch(PDOException $e)

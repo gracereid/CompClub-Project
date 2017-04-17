@@ -2,6 +2,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<?php
+        $db = new mysqli("localhost", "cclub", "cclub", "Cclub_shop");
+        if ($db->connect_errno) {
+                die("Could not connect to database: " . mysqli_connect_error());
+        }
+?>
+
         <title> Cclub Shop </title>
         <meta charset="utf-8">
         <meta name="viewport" content=""width=device-width, initial-scale="1">
@@ -60,8 +67,8 @@
      <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-default">Submit</button>
     </div>
-    
-    
+
+   
    
     <script>
    
