@@ -35,7 +35,7 @@ if(!isset($_POST['pwd2']))//not from signup
 					die ($e -> getMessage());
 				}
 		
-		if($userPassIn==$userPassword)
+		if(password_verify($userPassIn,$userPassword))
 		{
 			echo 'type = '.$row['type'];
 			if($row['type']=="m")//member
